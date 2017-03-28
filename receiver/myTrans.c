@@ -88,10 +88,10 @@ int main()
           bitCount = fmod(diff[i],estTimePerBit);
           fprint("%d",bitCount);
           for(j=0;j<bitCount;j++){
-            letter |=bit[i]<<eightCount;
+            letter |=edge_state[i]<<eightCount;
             if(eightCount==8){
               fprint("%c",letter);
-              eightCount==0;
+              eightCount=0;
               break;
             }
             eightCount++;
