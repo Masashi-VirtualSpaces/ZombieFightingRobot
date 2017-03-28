@@ -89,8 +89,8 @@ int main()
           printf("%d",bitCount);
           for(j=0;j<bitCount;j++){
             letter |=edge_state[i]<<eightCount;
-            if(eightCount==8){
-              printf("%c",letter);
+            if(eightCount = 8){
+              printf("Letter: %c",letter);
               eightCount=0;
               break;
             }
