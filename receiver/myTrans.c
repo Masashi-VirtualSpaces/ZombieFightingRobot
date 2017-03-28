@@ -76,7 +76,7 @@ int main()
       double estTimePerBit = .6;
       double delimiter = 23;
       int eightCount = 0;
-      double bitCount = 0;
+      int bitCount = 0;
       int j = 0;
       //int curLetter = [8];
       char letter = 0;
@@ -85,12 +85,12 @@ int main()
           letter = 0;
         }
         else{
-          bitCount = fmod(diff[i],estTimePerBit);
-          fprint("%d",bitCount);
+          bitCount = (int)(diff[i]/estTimePerBit);
+          printf("%d",bitCount);
           for(j=0;j<bitCount;j++){
             letter |=edge_state[i]<<eightCount;
             if(eightCount==8){
-              fprint("%c",letter);
+              printf("%c",letter);
               eightCount=0;
               break;
             }
