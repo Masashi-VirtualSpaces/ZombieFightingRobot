@@ -3,7 +3,7 @@
  transceivertest.c:
 
  Compile command:
-    gcc -o xcvr transceivertest.c -Wall -lwiringPi
+    gcc -o xcvr myTrans.c -Wall -lwiringPi
 
  Usage:
    sudo ./xcvr
@@ -80,14 +80,22 @@ int main()
       int j = 0;
       //int curLetter = [8];
       char letter = 0;
-			for(i=0;i<19;i++){
+			for(i=18;i>=0;i--){
         if(diff[i]>delimiter && edge_state == 1){
           letter = 0;
         }
         else{
           bitCount = fmod(diff[i],estTimePerBit);
           fprint("%d",bitCount);
-
+          for(j=0;j<bitCount;j++){
+            letter |=bit[i]<<eightCount;
+            if(eightCount==8){
+              fprint("%c",letter);
+              eightCount==0;
+              break;
+            }
+            eightCount++;
+          }
         }
       }
 
