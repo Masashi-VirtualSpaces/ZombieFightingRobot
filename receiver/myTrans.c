@@ -86,7 +86,7 @@ int main()
         }
         else{
           bitCount = (int)(diff[i]/estTimePerBit);
-          printf("%d",bitCount);
+          //printf("%d",bitCount);
           for(j=0;j<bitCount;j++){
             letter |=edge_state[i]<<eightCount;
             if(eightCount == 8){
