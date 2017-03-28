@@ -1,3 +1,4 @@
+//My version with code
 /*
  transceivertest.c:
 
@@ -16,7 +17,7 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include <wiringPi.h>
-
+#include <math.h>
 
 void control_event(int sig);
 
@@ -68,8 +69,27 @@ int main()
 				diff[i] = time_diff(ir_edge_time[i+1], ir_edge_time[i]);
 				printf("i:%d , diff= %fms state= %d\n", i, diff[i]/1000, edge_state[i]);
 			}
+
 			printf("\n");
 			/* EDIT THIS SECTION To parse diff/edge_state AND print the character*/
+      //***Change estTimePerBit based on tested estimated time per bit.***
+      double estTimePerBit = .6;
+      double delimiter = 23;
+      int eightCount = 0;
+      double bitCount = 0;
+      int j = 0;
+      //int curLetter = [8];
+      char letter = 0;
+			for(i=0;i<19;i++){
+        if(diff[i]>delimiter && edge_state == 1){
+          letter = 0;
+        }
+        else{
+          bitCount = fmod(diff[i],estTimePerBit);
+          fprint("%d",bitCount);
+
+        }
+      }
 
             delay(100);
 			edge_cnt = 0;
