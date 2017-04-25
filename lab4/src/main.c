@@ -21,7 +21,7 @@ Ross the meme master Hartley
 #include<softPwm.h>
 
 int main(){
-  wiringPiSetupGpio();
+  wiringPiSetup();
 
   //Declare global variable for communication between threads.
   bool run = true;
