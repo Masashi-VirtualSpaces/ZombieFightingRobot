@@ -8,7 +8,7 @@ Ross the meme master Hartley
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
-#include<stdbool.h>
+#include <stdbool.h>
 #include <signal.h>
 #include <unistd.h>
 #include <sys/time.h>
@@ -30,8 +30,8 @@ int main(){
   double CurrentDistance = 0;
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
-  pinMode(PWM_LEFT,PWM_OUTPUT);
-  pinMode(PWM_RIGHT,PWM_OUTPUT);
+  pinMode(PWM_LEFT,OUTPUT);
+  pinMode(PWM_RIGHT,OUTPUT);
   softPwmCreate(PWM_LEFT,0,100);
   softPwmCreate(PWM_RIGHT,0,100);
 
@@ -40,13 +40,15 @@ int main(){
   bool switchWait = true;
   pinMode(IN_SW_UTIL_1,INPUT);
   printf("about to go into wait mode. Activate\n");
-  
+
   while(switchWait){
-    softPwmWrite(PWM_LEFT,0);
-    softPwmWrite(PWM_RIGHT,0);
+    //softPwmWrite(PWM_LEFT,0);
+    //softPwmWrite(PWM_RIGHT,0);
     if(digitalRead(IN_SW_UTIL_1)==0){
       switchWait = false;
+      //break;
     }
+    delay(100);
   }
 
   printf("Made it past switch\n");
