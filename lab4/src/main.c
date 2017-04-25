@@ -39,7 +39,7 @@ int main(){
   printf("about to go into wait mode. Activate\n");
 
   while(switchWait){
-    if(digitalRead(IN_SW_UTIL_1)){
+    if(!digitalRead(IN_SW_UTIL_1)){
       switchWait = false;
       softPwmWrite(PWM_LEFT,0);
       softPwmWrite(PWM_RIGHT,0);
