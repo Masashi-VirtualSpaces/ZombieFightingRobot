@@ -41,6 +41,8 @@ int main(){
   while(switchWait){
     if(digitalRead(IN_SW_UTIL_1) == 0){
       switchWait = false;
+      softPwmWrite(PWM_LEFT,75);
+      softPwmWrite(PWM_RIGHT,75);
     }
   }
 
