@@ -30,19 +30,17 @@ int main(){
   double CurrentDistance = 0;
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
-  if(softPwmCreate(PWM_LEFT,0,100)){
-    printf("left wheel initialized\n");
-  }
-  if(softPwmCreate(PWM_RIGHT,0,100)){
-    printf("right wheel initialized\n");
-  }
+  pinMode(PWM_LEFT,PWM_OUTPUT);
+  pinMode(PWM_RIGHT,PWM_OUTPUT);
+  softPwmCreate(PWM_LEFT,0,100);
+  softPwmCreate(PWM_RIGHT,0,100);
 
   //Wait for switch to be hit in order to start program.
   //pinMode()
   bool switchWait = true;
   printf("about to go into wait mode. Activate\n");
   while(switchWait){
-    if(digitalRead(IN_SW_UTIL_1)){
+    if(digitalRead(IN_SW_UTIL_1)==LOW){
       switchWait = false;
       softPwmWrite(PWM_LEFT,0);
       softPwmWrite(PWM_RIGHT,0);
