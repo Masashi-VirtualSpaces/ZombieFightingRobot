@@ -8,6 +8,7 @@ Ross the meme master Hartley
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
+#include<stdbool.h>
 #include <signal.h>
 #include <unistd.h>
 #include <sys/time.h>
