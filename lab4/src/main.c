@@ -29,7 +29,7 @@ int main(){
   double CurrentDistance = 0;
 
   //Wait for switch to be hit in order to start program.
-  pinMode()
+  //pinMode()
   bool switchWait = true;
 
   cout<<"about to go into wait mode. Activate"<<endl;
