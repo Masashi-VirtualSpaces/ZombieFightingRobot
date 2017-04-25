@@ -6,6 +6,7 @@ Ross the meme master Hartley
 */
 #include <stdio.h>
 #include <string.h>
+#include <iostream.h>
 #include <errno.h>
 #include <stdlib.h>
 #include<stdbool.h>
