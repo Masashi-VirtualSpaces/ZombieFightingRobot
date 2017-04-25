@@ -18,6 +18,7 @@ Ross the meme master Hartley
 #include<proximity.h>
 #include<utils.h>
 #include<web.h>
+#include<softPwm.h>
 
 int main(){
   wiringPiSetupGpio();
@@ -28,10 +29,13 @@ int main(){
   bool PlaySong = false;
   double CurrentDistance = 0;
 
+  //Set up motor PWM's initialize them to 0 with range 0-100%
+  softPwmCreate(PWM_LEFT,0,100);
+  softPwmCreate(PWM_RIGHT,0,100);
+
   //Wait for switch to be hit in order to start program.
   //pinMode()
   bool switchWait = true;
-
   printf("about to go into wait mode. Activate\n");
 
   while(switchWait){
