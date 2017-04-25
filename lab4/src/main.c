@@ -31,10 +31,10 @@ int main(){
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
   if(softPwmCreate(PWM_LEFT,0,100)){
-    print("left wheel initialized\n");
+    printf("left wheel initialized\n");
   }
   if(softPwmCreate(PWM_RIGHT,0,100)){
-    prinf("right wheel initialized\n");
+    printf("right wheel initialized\n");
   }
 
   //Wait for switch to be hit in order to start program.
