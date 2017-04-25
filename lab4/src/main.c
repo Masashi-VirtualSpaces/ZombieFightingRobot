@@ -22,7 +22,7 @@ Ross the meme master Hartley
 
 int main(){
   wiringPiSetupGpio();
-  pinMode(12,INPUT);
+
   //Declare global variable for communication between threads.
   bool run = true;
   bool DetectedObj = false;
@@ -38,12 +38,14 @@ int main(){
   //Wait for switch to be hit in order to start program.
   //pinMode()
   bool switchWait = true;
+  pinMode(IN_SW_UTIL_1,INPUT);
   printf("about to go into wait mode. Activate\n");
+  
   while(switchWait){
-    if(digitalRead(IN_SW_UTIL_1)==LOW){
+    softPwmWrite(PWM_LEFT,0);
+    softPwmWrite(PWM_RIGHT,0);
+    if(digitalRead(IN_SW_UTIL_1)==0){
       switchWait = false;
-      softPwmWrite(PWM_LEFT,0);
-      softPwmWrite(PWM_RIGHT,0);
     }
   }
 
