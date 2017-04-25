@@ -4,6 +4,15 @@ Masashi Schafer
 Ross the meme master Hartley
 04/25/2017
 */
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/time.h>
+#include <wiringPi.h>
+#include <math.h>
 #include<pinout.h>
 #include<proximity.h>
 #include<utils.h>
