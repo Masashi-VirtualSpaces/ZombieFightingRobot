@@ -37,16 +37,16 @@ int main(){
 
   //Wait for switch to be hit in order to start program.
   //pinMode()
-  //bool switchWait = true;
+  bool switchWait = true;
   pinMode(IN_SW_UTIL_1,INPUT);
   printf("about to go into wait mode.\n");
   printf("digitalRead(IN_SW_UTIL_1):%d\n", digitalRead(IN_SW_UTIL_1));
   //int read = 1;
-  while(1){
+  while(switchWait){
 
     if(digitalRead(IN_SW_UTIL_1)==0){
-      //switchWait = false;
-      break;
+      switchWait = false;
+      //break;
     }
     delay(100);
   }
