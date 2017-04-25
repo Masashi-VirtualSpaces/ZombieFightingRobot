@@ -17,7 +17,7 @@ $(ODIR)/%.o: $(SDIR)/%.c
 	@mkdir -p $(@D)
 	$(CC) -c $(INC) -o $@ $< $(CFLAGS) $(LIBS)
 
-diagnostic: $(OBJS_DIAG)
+lab4: $(OBJS_DIAG)
 	$(CC) -o $@ $^ $(CFLAGS) $(LIBS)
 
 # zombie: $(OBJS_MAIN)
