@@ -39,11 +39,10 @@ int main(){
   //pinMode()
   bool switchWait = true;
   pinMode(IN_SW_UTIL_1,INPUT);
-  printf("about to go into wait mode. Activate\n");
-
+  printf("about to go into wait mode.\n");
+  printf("digitalRead(IN_SW_UTIL_1):%d\n", digitalRead(IN_SW_UTIL_1));
   while(switchWait){
-    //softPwmWrite(PWM_LEFT,0);
-    //softPwmWrite(PWM_RIGHT,0);
+
     if(digitalRead(IN_SW_UTIL_1)==0){
       switchWait = false;
       //break;
@@ -52,5 +51,6 @@ int main(){
   }
 
   printf("Made it past switch\n");
+  fflush(stdout);
 
 }
