@@ -63,7 +63,7 @@ int main(){
 //This parts activates the threads.
 int rc;
 pthread_t thread1;
-rc = pthread_create(thread1,NULL,broadcast,(void *)NULL);
+rc = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 /*
 pthread_t threads[NUM_THREADS];
 int rc;
