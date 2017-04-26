@@ -59,7 +59,7 @@ int main(){
 
   //This section activates threads.
   int myBroadcast;
-  myBroadcast = pthread_create(1,NULL,broadcast);
+  myBroadcast = pthread_create(1,NULL,broadcast,NULL);
   //broadcast(BROADCASTIP);
   delay(200);
   printf("Made it past switch\n");
