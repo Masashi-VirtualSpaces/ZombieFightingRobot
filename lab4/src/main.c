@@ -23,7 +23,7 @@ Ross the meme master Hartley
 #include<pthread.h>
 
 
-#define BROADCASTIP "10.122.60.41"
+//#define BROADCASTIP "10.122.60.41"
 
 void broadcast();
 
@@ -59,7 +59,7 @@ int main(){
 
   //This section activates threads.
   int myBroadcast;
-  myBroadcast = pthread_create(1,NULL,broadcast,(void *)BROADCASTIP);
+  myBroadcast = pthread_create(1,NULL,broadcast);
   //broadcast(BROADCASTIP);
   delay(200);
   printf("Made it past switch\n");
@@ -67,7 +67,8 @@ int main(){
 
 }
 
-void broadcast(char *IP){
+void broadcast(){
+  char *IP = "10.122.60.41";
   char *myMessage = "Bonjour de Masashi et Ross!";
   //whiel(1){
   //    delay(20000);
