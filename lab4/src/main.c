@@ -67,7 +67,7 @@ int main(){
 
 }
 
-void *broadcast(){
+void *broadcast(void *arg){
   char *IP = "10.122.60.41";
   char *myMessage = "Bonjour de Masashi et Ross!";
   //whiel(1){
