@@ -71,7 +71,7 @@ void broadcast(char *IP){
   //whiel(1){
   //    delay(20000);
       broadcast_msg(myMessage,IP);
-      fprint("Sent message");
+      printf("Sent message");
 //  }
 }
 /*
