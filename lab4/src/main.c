@@ -61,7 +61,7 @@ int main(){
   int myBroadcast;
   myBroadcast = pthread_create(1,NULL,broadcast,(void *)BROADCASTIP);
   //broadcast(BROADCASTIP);
-
+  delay(200);
   printf("Made it past switch\n");
   fflush(stdout);
 
