@@ -4,6 +4,7 @@ Masashi Schafer
 Ross the meme master Hartley
 04/25/2017
 */
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -19,6 +20,12 @@ Ross the meme master Hartley
 #include<utils.h>
 #include<web.h>
 #include<softPwm.h>
+#include<pthread.h>
+
+
+#define BROADCASTIP "10.122.60.41"
+
+void broadcast();
 
 int main(){
   wiringPiSetup();
@@ -41,9 +48,8 @@ int main(){
   pinMode(IN_SW_UTIL_1,INPUT);
   printf("about to go into wait mode.\n");
   printf("digitalRead(IN_SW_UTIL_1):%d\n", digitalRead(IN_SW_UTIL_1));
-  //int read = 1;
-  while(switchWait){
 
+  while(switchWait){
     if(digitalRead(IN_SW_UTIL_1)==0){
       switchWait = false;
       //break;
@@ -51,7 +57,24 @@ int main(){
     delay(100);
   }
 
+  //This section activates threads.
+  //myBroadcast = pthread_create(1,NULL,broadcast,(void *)BROADCASTIP);
+  broadcast(BROADCASTIP);
+
   printf("Made it past switch\n");
   fflush(stdout);
 
 }
+
+void broadcast(char *IP){
+  char *myMessage = "Bonjour de Masashi et Ross!";
+  //whiel(1){
+  //    delay(20000);
+      broadcast_msg(myMessage,IP);
+//  }
+}
+/*
+void proximity(){
+
+}
+*/
