@@ -25,7 +25,7 @@ Ross the meme master Hartley
 
 //#define BROADCASTIP "10.122.60.41"
 
-void broadcast();
+void *broadcast(void *arg);
 
 int main(){
   wiringPiSetup();
@@ -58,8 +58,8 @@ int main(){
   }
 
   //This section activates threads.
-  int myBroadcast;
-  myBroadcast = pthread_create(1,NULL,broadcast,NULL);
+  //int myBroadcast;
+  pthread_create(1,NULL,broadcast,NULL);
   //broadcast(BROADCASTIP);
   delay(200);
   printf("Made it past switch\n");
