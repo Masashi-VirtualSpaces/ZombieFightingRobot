@@ -23,6 +23,8 @@ Ross the meme master Hartley
 #include<pthread.h>
 
 
+
+#define NUM_THREADS 1
 //#define BROADCASTIP "10.122.60.41"
 
 void *broadcast(void *arg);
@@ -57,12 +59,26 @@ int main(){
     delay(100);
   }
 
+  pthread_t threads[NUM_THREADS];
+int rc;
+long t;
+for(t=0; t<NUM_THREADS; t++){
+   printf("In main: creating thread %ld\n", t);
+   rc = pthread_create(&threads[t], NULL, broadcast, (void *)t);
+   if (rc){
+      printf("ERROR; return code from pthread_create() is %d\n", rc);
+      exit(-1);
+    }
+  }
+
   //This section activates threads.
   //int myBroadcast;
-  pthread_create(1,NULL,broadcast,NULL);
+  //pthread_create(1,NULL,broadcast,NULL);
   //broadcast(BROADCASTIP);
   delay(200);
   printf("Made it past switch\n");
+
+  pthread_exit(NULL);
   fflush(stdout);
 
 }
@@ -72,8 +88,10 @@ void *broadcast(void *arg){
   char *myMessage = "Bonjour de Masashi et Ross!";
   //whiel(1){
   //    delay(20000);
+      printf("about to send message");
       broadcast_msg(myMessage,IP);
       printf("Sent message");
+      pthread_exit(NULL);
 //  }
 }
 /*
