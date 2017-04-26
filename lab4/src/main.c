@@ -59,7 +59,12 @@ int main(){
     delay(100);
   }
 
-  pthread_t threads[NUM_THREADS];
+
+//This parts activates the threads.
+pthread_t broadcaster;
+pthread_create(broadcaster,NULL,broadcast,(void *)NULL);
+/*
+pthread_t threads[NUM_THREADS];
 int rc;
 long t;
 for(t=0; t<NUM_THREADS; t++){
@@ -70,15 +75,11 @@ for(t=0; t<NUM_THREADS; t++){
       exit(-1);
     }
   }
+*/
 
-  //This section activates threads.
-  //int myBroadcast;
-  //pthread_create(1,NULL,broadcast,NULL);
-  //broadcast(BROADCASTIP);
+
   delay(200);
   printf("Made it past switch\n");
-
-  pthread_exit(NULL);
   fflush(stdout);
 
 }
