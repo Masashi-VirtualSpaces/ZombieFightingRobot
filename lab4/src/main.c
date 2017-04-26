@@ -58,6 +58,7 @@ int main(){
   }
 
   //This section activates threads.
+  int myBroadcast;
   myBroadcast = pthread_create(1,NULL,broadcast,(void *)BROADCASTIP);
   //broadcast(BROADCASTIP);
 
