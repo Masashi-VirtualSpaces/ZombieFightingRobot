@@ -83,15 +83,19 @@ for(t=0; t<NUM_THREADS; t++){
 
 }
 
+
+
+
+
 void *broadcast(void *arg){
   char *IP = "10.122.60.41";
   char *myMessage = "Bonjour de Masashi et Ross!";
   //whiel(1){
   //    delay(20000);
-      printf("about to send message");
+      printf("about to send message\n");
       broadcast_msg(myMessage,IP);
-      printf("Sent message");
-      pthread_exit(NULL);
+      printf("Sent message\n");
+      //pthread_exit(NULL);
 //  }
 }
 /*
