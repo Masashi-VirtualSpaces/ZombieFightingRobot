@@ -58,8 +58,8 @@ int main(){
   }
 
   //This section activates threads.
-  //myBroadcast = pthread_create(1,NULL,broadcast,(void *)BROADCASTIP);
-  broadcast(BROADCASTIP);
+  myBroadcast = pthread_create(1,NULL,broadcast,(void *)BROADCASTIP);
+  //broadcast(BROADCASTIP);
 
   printf("Made it past switch\n");
   fflush(stdout);
