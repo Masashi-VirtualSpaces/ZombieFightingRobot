@@ -61,8 +61,9 @@ int main(){
 
 
 //This parts activates the threads.
-pthread_t broadcaster;
-pthread_create(broadcaster,NULL,broadcast,(void *)NULL);
+int rc;
+pthread_t thead1;
+rc = pthread_create(thread1,NULL,broadcast,(void *)NULL);
 /*
 pthread_t threads[NUM_THREADS];
 int rc;
