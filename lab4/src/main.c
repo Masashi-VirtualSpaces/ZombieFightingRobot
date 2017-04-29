@@ -33,7 +33,7 @@ void *proximity(void *arg);
 void *listen(void *arg);
 //Global variable declarations.
 double distance = 0;
-const char* receivedMessage = NULL;
+const char receivedMessage;
 //const char stop = "stop";
 
 int main(){
@@ -137,7 +137,7 @@ void *listen(void *arg){
   while(1)
   {
     receivedMessage = getUDPmessage();
-    printf("message: %c\n",&receivedMessage);
+    printf("message: %c\n",receivedMessage);
     delay(200);
   }
 }
