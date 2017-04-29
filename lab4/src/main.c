@@ -33,8 +33,8 @@ void *proximity(void *arg);
 void *listen(void *arg);
 //Global variable declarations.
 double distance = 0;
-char* receivedMessage;
-//const char stop = "stop";
+const char* receivedMessage;
+const char* stop = "stop";
 
 int main(){
   wiringPiSetup();
@@ -78,7 +78,7 @@ rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 
-while(receivedMessage != "stop"){
+while(strcmp(receivedMessage,stop)!= 1){
   delay(2000);
   printf("Distnace: %f\n",distance );
 }
