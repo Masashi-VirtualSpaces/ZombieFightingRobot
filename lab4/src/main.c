@@ -108,7 +108,7 @@ for(t=0; t<NUM_THREADS; t++){
 
 
 void *broadcast(void *arg){
-  printf("Now broadcasting!\n", );
+  printf("Now broadcasting!\n");
   char *IP = "10.122.60.41";
   char *myMessage = "Bonjour de Masashi et Ross!";
   //whiel(1){
@@ -121,7 +121,7 @@ void *broadcast(void *arg){
 }
 
 void *proximity(void *arg){
-  printf("Now measuring distance!\n", );
+  printf("Now measuring distance!\n");
   init_prox();
   //double distance = 0;
   while(1)
@@ -133,7 +133,7 @@ void *proximity(void *arg){
 }
 
 void *listen(void *arg){
-  printf("Now listening!\n", );
+  printf("Now listening!\n");
   while(1)
   {
     receivedMessage = getUDPmessage();
