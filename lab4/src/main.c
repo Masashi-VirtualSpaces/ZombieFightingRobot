@@ -79,13 +79,13 @@ rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 
 int done = 1;
-printf("done: %d \n",done);
-done = strcmp(receivedMessage,stop);
-printf("done: %d \n",done);
+//printf("done: %d \n",done);
+//done = strcmp(receivedMessage,stop);
+//printf("done: %d \n",done);
 
 while(done != 0){
   done = strcmp(receivedMessage,stop);
-  printf("done: %d \n",done);
+  //printf("done: %d \n",done);
   delay(2000);
   printf("Distnace: %f\n",distance );
 }
@@ -103,7 +103,7 @@ for(t=0; t<NUM_THREADS; t++){
   }
 */
 
-
+  
   delay(200);
   printf("Made it past switch\n");
   fflush(stdout);
