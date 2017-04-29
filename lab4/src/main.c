@@ -137,7 +137,7 @@ void *listen(void *arg){
   while(1)
   {
     receivedMessage = getUDPmessage();
-    printf("message: %c\n",receivedMessage);
+    printf("message: %s\n",receivedMessage);
     delay(200);
   }
 }
