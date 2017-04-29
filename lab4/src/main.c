@@ -80,7 +80,7 @@ rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 
 int done = 0;
 while(done != 1){
-  done = strcmp(receivedMessage,stop);
+  //done = strcmp(receivedMessage,stop);
   delay(2000);
   printf("Distnace: %f\n",distance );
 }
