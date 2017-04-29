@@ -30,11 +30,11 @@ Ross the meme master Hartley
 //Function delcarations for threads
 void *broadcast(void *arg);
 void *proximity(void *arg);
-
+void *listen(void *arg);
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = NULL;
-const char stop = "stop";
+//const char stop = "stop";
 
 int main(){
   wiringPiSetup();
@@ -78,7 +78,7 @@ rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 
-while(stop != receivedMessage){
+while("stop" != &receivedMessage){
   delay(2000);
   printf("Distnace: %f\n",distance );
 }
