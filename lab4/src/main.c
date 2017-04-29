@@ -28,6 +28,7 @@ Ross the meme master Hartley
 //#define BROADCASTIP "10.122.60.41"
 
 void *broadcast(void *arg);
+void *proximity(void *arg);
 
 int main(){
   wiringPiSetup();
@@ -61,9 +62,15 @@ int main(){
 
 
 //This parts activates the threads.
-int rc;
+int rc1;
+int rc2;
 pthread_t thread1;
-rc = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
+pthread_t thread2;
+rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
+rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
+while(1){
+  delay(200);
+}
 /*
 pthread_t threads[NUM_THREADS];
 int rc;
@@ -100,8 +107,14 @@ void *broadcast(void *arg){
       //pthread_exit(NULL);
 //  }
 }
-/*
-void proximity(){
 
+void *proximity(void *arg){
+  init_prox();
+  double distance = 0;
+  while(1)
+  {
+    distance = getCmDistance();
+    printf("Current distance: %d\n",distance);
+    delay(2000);
+  }
 }
-*/
