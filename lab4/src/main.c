@@ -27,9 +27,14 @@ Ross the meme master Hartley
 #define NUM_THREADS 1
 //#define BROADCASTIP "10.122.60.41"
 
+//Function delcarations for threads
 void *broadcast(void *arg);
 void *proximity(void *arg);
+
+//Global variable declarations.
 double distance = 0;
+const char* receivedMessage = NULL;
+const char stop = "stop";
 
 int main(){
   wiringPiSetup();
@@ -65,12 +70,16 @@ int main(){
 //This parts activates the threads.
 int rc1;
 int rc2;
+int rc3;
 pthread_t thread1;
 pthread_t thread2;
+pthread_t thread3;
 rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
-while(1){
-  delay(200);
+rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
+
+while(stop != receivedMessage){
+  delay(2000);
   printf("Distnace: %f\n",distance );
 }
 /*
@@ -113,10 +122,15 @@ void *broadcast(void *arg){
 void *proximity(void *arg){
   init_prox();
   //double distance = 0;
-  while(1)
+  while()
   {
-    delay(2000);
+    delay(200);
     distance = getCmDistance();
     //printf("Current distance: %f\n",distance);
   }
+}
+
+void *listen(void *arg){
+  receivedMessage = getUDPmessage();
+  delay(200);
 }
