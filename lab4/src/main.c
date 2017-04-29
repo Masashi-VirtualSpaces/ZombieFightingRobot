@@ -43,7 +43,7 @@ int main(){
   bool run = true;
   bool DetectedObj = false;
   bool PlaySong = false;
-  double CurrentDistance = 0;
+  //double CurrentDistance = 0;
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
   pinMode(PWM_LEFT,OUTPUT);
@@ -122,7 +122,7 @@ void *broadcast(void *arg){
 void *proximity(void *arg){
   init_prox();
   //double distance = 0;
-  while()
+  while(1)
   {
     delay(200);
     distance = getCmDistance();
@@ -131,6 +131,9 @@ void *proximity(void *arg){
 }
 
 void *listen(void *arg){
-  receivedMessage = getUDPmessage();
-  delay(200);
+  while(1)
+  {
+    receivedMessage = getUDPmessage();
+    delay(200);
+  }
 }
