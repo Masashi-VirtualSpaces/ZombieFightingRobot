@@ -29,6 +29,7 @@ Ross the meme master Hartley
 
 void *broadcast(void *arg);
 void *proximity(void *arg);
+double distance = 0;
 
 int main(){
   wiringPiSetup();
@@ -70,6 +71,7 @@ rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 while(1){
   delay(200);
+  printf("Distnace: %f\n",distance );
 }
 /*
 pthread_t threads[NUM_THREADS];
@@ -110,11 +112,11 @@ void *broadcast(void *arg){
 
 void *proximity(void *arg){
   init_prox();
-  double distance = 0;
+  //double distance = 0;
   while(1)
   {
-    distance = getCmDistance();
-    printf("Current distance: %f\n",distance);
     delay(2000);
+    distance = getCmDistance();
+    //printf("Current distance: %f\n",distance);
   }
 }
