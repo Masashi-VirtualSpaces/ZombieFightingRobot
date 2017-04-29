@@ -78,7 +78,7 @@ rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 
-int done = 1
+int done = 1;
 printf("done: %d \n",done);
 done = strcmp(receivedMessage,stop);
 printf("done: %d \n",done);
