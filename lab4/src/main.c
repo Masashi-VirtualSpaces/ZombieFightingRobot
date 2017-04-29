@@ -114,7 +114,7 @@ void *proximity(void *arg){
   while(1)
   {
     distance = getCmDistance();
-    printf("Current distance: %d\n",distance);
+    printf("Current distance: %f\n",distance);
     delay(2000);
   }
 }
