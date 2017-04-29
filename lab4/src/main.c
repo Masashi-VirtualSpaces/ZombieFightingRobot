@@ -83,7 +83,7 @@ printf("done: %d \n",done);
 done = strcmp(receivedMessage,stop);
 printf("done: %d \n",done);
 
-while(done == 1){
+while(done != 0){
   done = strcmp(receivedMessage,stop);
   printf("done: %d \n",done);
   delay(2000);
