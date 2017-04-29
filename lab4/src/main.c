@@ -33,7 +33,7 @@ void *proximity(void *arg);
 void *listen(void *arg);
 //Global variable declarations.
 double distance = 0;
-const char receivedMessage;
+char* receivedMessage;
 //const char stop = "stop";
 
 int main(){
