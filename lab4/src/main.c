@@ -31,19 +31,16 @@ Ross the meme master Hartley
 void *broadcast(void *arg);
 void *proximity(void *arg);
 void *listen(void *arg);
+void *songPlayer(void *arg);
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = "go";
 const char* stop = "stop";
+bool DetectedObj = false;
+bool PlaySong = false;
 
 int main(){
   wiringPiSetup();
-
-  //Declare global variable for communication between threads.
-  bool run = true;
-  bool DetectedObj = false;
-  bool PlaySong = false;
-  //findouble CurrentDistance = 0;
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
   pinMode(PWM_LEFT,OUTPUT);
@@ -71,23 +68,22 @@ int main(){
 int rc1;
 int rc2;
 int rc3;
+int rc4;
 pthread_t thread1;
 pthread_t thread2;
 pthread_t thread3;
+pthread_t thread4;
 rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
+rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
 
 int done = 1;
-//printf("done: %d \n",done);
-//done = strcmp(receivedMessage,stop);
-//printf("done: %d \n",done);
 
 while(done != 0){
-  done = strcmp(receivedMessage,stop);
-  //printf("done: %d \n",done);
   delay(2000);
   printf("Distnace: %f\n",distance );
+  done = strcmp(receivedMessage,stop);
 }
 /*
 pthread_t threads[NUM_THREADS];
@@ -103,7 +99,7 @@ for(t=0; t<NUM_THREADS; t++){
   }
 */
 
-  
+
   delay(200);
   printf("Made it past switch\n");
   fflush(stdout);
@@ -113,20 +109,24 @@ for(t=0; t<NUM_THREADS; t++){
 
 
 
-
+/*-----------------------------------------------------------------------------
+Function for broadcasting messages.
+-----------------------------------------------------------------------------*/
 void *broadcast(void *arg){
   printf("Now broadcasting!\n");
   char *IP = "10.122.60.41";
   char *myMessage = "Bonjour de Masashi et Ross!";
-  //whiel(1){
-  //    delay(20000);
+  while(1){
+      delay(20000);
       printf("about to send message\n");
       broadcast_msg(myMessage,IP);
       printf("Sent message\n");
-      //pthread_exit(NULL);
-//  }
+  }
 }
 
+/*-----------------------------------------------------------------------------
+//Function for checking distance in front of robot.
+-----------------------------------------------------------------------------*/
 void *proximity(void *arg){
   printf("Now measuring distance!\n");
   init_prox();
@@ -135,16 +135,40 @@ void *proximity(void *arg){
   {
     delay(200);
     distance = getCmDistance();
+    if(distance < 18){
+      DetectedObj = true;
+      PlaySong = true;
+    }
     //printf("Current distance: %f\n",distance);
   }
 }
-
+/*-----------------------------------------------------------------------------
+Function for listening for messages.
+-----------------------------------------------------------------------------*/
 void *listen(void *arg){
   printf("Now listening!\n");
   while(1)
   {
     receivedMessage = getUDPmessage();
     printf("message: %s\n",receivedMessage);
+    delay(200);
+  }
+}
+
+
+/*-----------------------------------------------------------------------------
+Function for controlling the motors.
+-----------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------
+Function for playing a song.
+-----------------------------------------------------------------------------*/
+void *songPlayer(void *arg){
+  printf("songPlayer read!\n");
+  while(1){
+    if(PlaySong){
+      printf("Playing Song!!!\n");
+    }
     delay(200);
   }
 }
