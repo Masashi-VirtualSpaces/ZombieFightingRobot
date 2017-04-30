@@ -191,7 +191,7 @@ void *songPlayer(void *arg){
     if(PlaySong){
       printf("Playing Song!!!\n");
       init_player();
-      play_file("the_cranberries_zombie_mono_short.mp3",50);
+      play_file("the_cranberries_zombie_mono_short.mp3",2000);
       stopAudio();
       delay(1000);
       PlaySong = false;
