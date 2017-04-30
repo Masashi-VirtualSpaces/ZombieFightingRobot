@@ -168,6 +168,7 @@ void *songPlayer(void *arg){
   while(1){
     if(PlaySong){
       printf("Playing Song!!!\n");
+      PlaySong = false;
     }
     delay(200);
   }
