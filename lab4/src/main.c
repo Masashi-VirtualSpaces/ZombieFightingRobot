@@ -32,7 +32,7 @@ void *broadcast(void *arg);
 void *proximity(void *arg);
 void *listen(void *arg);
 void *songPlayer(void *arg);
-void *motorController(void *arg)
+void *motorController(void *arg);
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = "go";
