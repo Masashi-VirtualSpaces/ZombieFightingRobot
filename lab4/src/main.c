@@ -24,7 +24,7 @@ Ross the meme master Hartley
 
 
 
-#define NUM_THREADS 1
+//#define NUM_THREADS 1
 //#define BROADCASTIP "10.122.60.41"
 
 //Function delcarations for threads
@@ -32,6 +32,7 @@ void *broadcast(void *arg);
 void *proximity(void *arg);
 void *listen(void *arg);
 void *songPlayer(void *arg);
+void *motorController(void *arg)
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = "go";
@@ -69,16 +70,28 @@ int rc1;
 int rc2;
 int rc3;
 int rc4;
+int rc5;
 pthread_t thread1;
 pthread_t thread2;
 pthread_t thread3;
 pthread_t thread4;
+pthread_t thread5;
 rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
+rc5 = pthread_create(&thread5,NULL,motorController,(void *)NULL);
 
-
+if(rc1||rc2||rc3||rc4||rc5){
+  printf("Error in initializing threads!\n");
+  printf("broadcast: %d\n
+  proximity: %d\n
+  listen: %d\n
+  songPlayer: %d\n
+  motorController: %d\n"
+  ,rc1,rc2,rc3,rc4,rc5);
+  exit(-1);
+}
 //Main loop for running robot.
 int done = 1;
 while(done != 0){
@@ -99,7 +112,6 @@ for(t=0; t<NUM_THREADS; t++){
     }
   }
 */
-
 
   delay(200);
   printf("Made it past switch\n");
@@ -158,7 +170,21 @@ void *listen(void *arg){
 /*-----------------------------------------------------------------------------
 Function for controlling the motors.
 -----------------------------------------------------------------------------*/
-
+void *motorController(void *arg){
+  printf("Motor controller initialized!\n");
+  while(1){
+    if(DetectedObj){
+      printf("motors stopped\n");
+      delay(1000);
+      printf("turning robot 90 degrees.\n");
+      DetectedObj = false;
+    }
+    else{
+        printf("motors running forward.\n");
+    }
+    delay(300);
+  }
+}
 /*-----------------------------------------------------------------------------
 Function for playing a song.
 -----------------------------------------------------------------------------*/
