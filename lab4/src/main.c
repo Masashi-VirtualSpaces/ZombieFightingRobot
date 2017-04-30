@@ -177,7 +177,7 @@ void *motorController(void *arg){
       DetectedObj = false;
     }
     else{
-        printf("motors running forward.\n");
+        //printf("motors running forward.\n");
     }
     delay(300);
   }
@@ -191,10 +191,9 @@ void *songPlayer(void *arg){
   while(1){
     if(PlaySong){
       printf("Playing Song!!!\n");
-
       play_file("the_cranberries_zombie_mono_short.mp3",90);
       //stopAudio();
-      delay(1000);
+      //delay(1000);
       PlaySong = false;
       printf("Play song reset\n");
     }
