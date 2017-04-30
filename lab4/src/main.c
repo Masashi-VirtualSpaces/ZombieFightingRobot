@@ -187,12 +187,13 @@ Function for playing a song.
 -----------------------------------------------------------------------------*/
 void *songPlayer(void *arg){
   printf("songPlayer read!\n");
+  init_player();
   while(1){
     if(PlaySong){
       printf("Playing Song!!!\n");
-      init_player();
+
       play_file("the_cranberries_zombie_mono_short.mp3",2000);
-      stopAudio();
+      //stopAudio();
       delay(1000);
       PlaySong = false;
       printf("Play song reset\n");
