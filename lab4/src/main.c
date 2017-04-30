@@ -85,12 +85,7 @@ rc5 = pthread_create(&thread5,NULL,motorController,(void *)NULL);
 //Test for errors in thread initialization.
 if(rc1||rc2||rc3||rc4||rc5){
   printf("Error in initializing threads!\n");
-  printf("broadcast: %d\n
-  proximity: %d\n
-  listen: %d\n
-  songPlayer: %d\n
-  motorController: %d\n"
-  ,rc1,rc2,rc3,rc4,rc5);
+  printf("broadcast: %d\nproximity: %d\nlisten: %d\nsongPlayer: %d\nmotorController: %d\n",rc1,rc2,rc3,rc4,rc5);
   exit(-1);
 }
 
