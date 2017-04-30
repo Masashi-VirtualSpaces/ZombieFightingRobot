@@ -78,8 +78,9 @@ rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
 
-int done = 1;
 
+//Main loop for running robot.
+int done = 1;
 while(done != 0){
   delay(2000);
   printf("Distnace: %f\n",distance );
@@ -103,10 +104,8 @@ for(t=0; t<NUM_THREADS; t++){
   delay(200);
   printf("Made it past switch\n");
   fflush(stdout);
-
+  return 0;
 }
-
-
 
 
 /*-----------------------------------------------------------------------------
@@ -133,7 +132,7 @@ void *proximity(void *arg){
   //double distance = 0;
   while(1)
   {
-    delay(200);
+    delay(100);
     distance = getCmDistance();
     if(distance < 18 && distance > 0){
       DetectedObj = true;
@@ -172,6 +171,6 @@ void *songPlayer(void *arg){
       PlaySong = false;
       printf("Play song reset\n");
     }
-    delay(200);
+    delay(300);
   }
 }
