@@ -135,7 +135,7 @@ void *proximity(void *arg){
   {
     delay(200);
     distance = getCmDistance();
-    if(distance < 18){
+    if(distance < 18 && PlaySong > 0){
       DetectedObj = true;
       PlaySong = true;
     }
@@ -168,7 +168,9 @@ void *songPlayer(void *arg){
   while(1){
     if(PlaySong){
       printf("Playing Song!!!\n");
+      delay(1000);
       PlaySong = false;
+      printf("Play song reset\n");
     }
     delay(200);
   }
