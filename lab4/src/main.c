@@ -194,7 +194,7 @@ void *motorController(void *arg){
       digitalWrite(OUT_MT_DIR_LEFT,1);
       softPwmWrite(PWM_RIGHT,55);
       softPwmWrite(PWM_LEFT,55);
-      delay(400);
+      delay(500);
       softPwmWrite(PWM_RIGHT,0);
       softPwmWrite(PWM_LEFT,0);
       DetectedObj = false;
