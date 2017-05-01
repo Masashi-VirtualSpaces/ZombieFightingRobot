@@ -241,9 +241,10 @@ void *timeTracker(void *arg){
       timePassed = 0;
       timeReset = false;
     }
-    else if(!DetectedObj)
+    else if(!DetectedObj){
       delay(20);
       timePassed+=20;
+    }
     }
   }
 }
