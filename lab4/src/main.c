@@ -41,6 +41,7 @@ const char* receivedMessage = "go";
 const char* stop = "stop";
 bool DetectedObj = false;
 bool PlaySong = false;
+bool timeReset = false;
 int timePassed = 0;
 
 int main(){
@@ -194,6 +195,7 @@ void *motorController(void *arg){
       softPwmWrite(PWM_RIGHT,0);
       softPwmWrite(PWM_LEFT,0);
       DetectedObj = false;
+      timeReset = true;
     }
     else if(timePassed > 2000){
       softPwmWrite(PWM_RIGHT,0);
@@ -235,10 +237,11 @@ void *songPlayer(void *arg){
 
 void *timeTracker(void *arg){
   while(1){
-    if(DetectedObj){
+    if(timeReset){
       timePassed = 0;
+      timeReset = false;
     }
-    else{
+    else if(!DetectedObj)
       delay(20);
       timePassed+=20;
     }
