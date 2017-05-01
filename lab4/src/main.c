@@ -162,6 +162,7 @@ void *proximity(void *arg){
     }
     //printf("Current distance: %f\n",distance);
   }
+  delay(2000);
 }
 /*-----------------------------------------------------------------------------
 Function for listening for messages.
