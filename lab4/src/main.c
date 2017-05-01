@@ -208,7 +208,7 @@ void *motorController(void *arg){
       softPwmWrite(PWM_LEFT,50);
       delay(1500);
       timeReset = true;
-      //receivedMessage = "stop";
+      receivedMessage = "stop";
     }
     else{
         //printf("motors running forward.\n");
