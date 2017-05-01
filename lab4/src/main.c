@@ -1,7 +1,7 @@
 /*
 Main program for running lab 4
-Masashi Schafer
-Ross the meme master Hartley
+Masashi "Overly Bossy" Schafer
+Ross "meme master" Hartley
 04/25/2017
 */
 
@@ -45,6 +45,8 @@ int main(){
   wiringPiSetup();
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
+  pinMode(OUT_MT_DIR_LEFT,OUTPUT);
+  pinMode(OUT_MT_DIR_RIGHT,OUTPUT);
   pinMode(PWM_LEFT,OUTPUT);
   pinMode(PWM_RIGHT,OUTPUT);
   softPwmCreate(PWM_LEFT,0,100);
@@ -94,7 +96,7 @@ if(rc1||rc2||rc3||rc4||rc5){
 int done = 1;
 while(done != 0){
   delay(2000);
-  printf("Distnace: %f\n",distance );
+  printf("Distance: %f\n",distance );
   done = strcmp(receivedMessage,stop);
 }
 /*
@@ -176,9 +178,14 @@ void *motorController(void *arg){
       delay(1000);
       printf("turning robot 90 degrees.\n");
       DetectedObj = false;
+      softPwmWrite(PWM_RIGHT,75);
     }
     else{
         //printf("motors running forward.\n");
+      digitalWrite(OUT_MT_DIR_RIGHT,1);
+      digitalWrite(OUT_MT_DIR_LEFT,1);
+      softPwmWrite(PWM_RIGHT,75);
+      softPwmWrite(PWM_LEFT,75);
     }
     delay(300);
   }
