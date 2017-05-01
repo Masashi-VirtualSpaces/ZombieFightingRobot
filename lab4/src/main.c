@@ -51,6 +51,8 @@ int main(){
   pinMode(PWM_RIGHT,OUTPUT);
   softPwmCreate(PWM_LEFT,0,100);
   softPwmCreate(PWM_RIGHT,0,100);
+  digitalWrite(OUT_MT_DIR_RIGHT,1);
+  digitalWrite(OUT_MT_DIR_LEFT,1);
 
   //Wait for switch to be hit in order to start program.
   //pinMode()
@@ -160,8 +162,8 @@ void *listen(void *arg){
   printf("Now listening!\n");
   while(1)
   {
-    receivedMessage = getUDPmessage();
-    printf("message: %s\n",receivedMessage);
+    //receivedMessage = getUDPmessage();
+    //printf("message: %s\n",receivedMessage);
     delay(200);
   }
 }
@@ -174,16 +176,20 @@ void *motorController(void *arg){
   printf("Motor controller initialized!\n");
   while(1){
     if(DetectedObj){
+      softPwmWrite(PWM_RIGHT,0);
+      softPwmWrite(PWM_LEFT,0);
       printf("motors stopped\n");
       delay(1000);
       printf("turning robot 90 degrees.\n");
-      DetectedObj = false;
+      softPwmWrite(PWM_LEFT,0);
       softPwmWrite(PWM_RIGHT,75);
+      delay(400);
+      softPwmWrite(PWM_RIGHT,0);
+      softPwmWrite(PWM_LEFT,0);
+      DetectedObj = false;
     }
     else{
         //printf("motors running forward.\n");
-      digitalWrite(OUT_MT_DIR_RIGHT,1);
-      digitalWrite(OUT_MT_DIR_LEFT,1);
       softPwmWrite(PWM_RIGHT,75);
       softPwmWrite(PWM_LEFT,75);
     }
