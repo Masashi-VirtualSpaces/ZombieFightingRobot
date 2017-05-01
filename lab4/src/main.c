@@ -78,6 +78,7 @@ int rc2;
 int rc3;
 int rc4;
 int rc5;
+int rc6;
 pthread_t thread1;
 pthread_t thread2;
 pthread_t thread3;
@@ -89,7 +90,7 @@ rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
 rc5 = pthread_create(&thread5,NULL,motorController,(void *)NULL);
-rv6 = pthread_create(&thread6,NULL,timeTracker,(void *)NULL);
+rc6 = pthread_create(&thread6,NULL,timeTracker,(void *)NULL);
 //Test for errors in thread initialization.
 if(rc1||rc2||rc3||rc4||rc5||rc6){
   printf("Error in initializing threads!\n");
