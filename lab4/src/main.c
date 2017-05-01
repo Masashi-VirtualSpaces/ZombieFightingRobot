@@ -245,6 +245,5 @@ void *timeTracker(void *arg){
       delay(20);
       timePassed+=20;
     }
-    }
   }
 }
