@@ -191,7 +191,7 @@ void *motorController(void *arg){
       delay(1000);
       printf("turning robot 90 degrees.\n");
       softPwmWrite(PWM_LEFT,0);
-      oftPwmWrite(PWM_RIGHT,1);
+      softPwmWrite(PWM_RIGHT,1);
       softPwmWrite(PWM_RIGHT,55);
       softPwmWrite(PWM_LEFT,55);
       delay(400);
