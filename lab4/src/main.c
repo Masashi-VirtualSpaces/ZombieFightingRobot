@@ -170,8 +170,8 @@ void *listen(void *arg){
   printf("Now listening!\n");
   while(1)
   {
-    //receivedMessage = getUDPmessage();
-    //printf("message: %s\n",receivedMessage);
+    receivedMessage = getUDPmessage();
+    printf("message: %s\n",receivedMessage);
     delay(200);
   }
 }
@@ -206,7 +206,7 @@ void *motorController(void *arg){
       softPwmWrite(PWM_RIGHT,50);
       softPwmWrite(PWM_LEFT,50);
       delay(1500);
-      receivedMessage = "stop";
+      //receivedMessage = "stop";
     }
     else{
         //printf("motors running forward.\n");
