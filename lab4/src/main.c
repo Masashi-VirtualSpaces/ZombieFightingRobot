@@ -191,8 +191,10 @@ void *motorController(void *arg){
       delay(1000);
       printf("turning robot 90 degrees.\n");
       softPwmWrite(PWM_LEFT,0);
+      oftPwmWrite(PWM_RIGHT,1);
       softPwmWrite(PWM_RIGHT,55);
-      delay(700);
+      softPwmWrite(PWM_LEFT,55);
+      delay(400);
       softPwmWrite(PWM_RIGHT,0);
       softPwmWrite(PWM_LEFT,0);
       DetectedObj = false;
@@ -206,7 +208,7 @@ void *motorController(void *arg){
       digitalWrite(OUT_MT_DIR_LEFT,1);
       softPwmWrite(PWM_RIGHT,50);
       softPwmWrite(PWM_LEFT,50);
-      delay(1500);
+      delay(1000);
       timeReset = true;
       //receivedMessage = "stop";
     }
