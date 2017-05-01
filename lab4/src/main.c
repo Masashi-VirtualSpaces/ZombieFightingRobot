@@ -206,6 +206,7 @@ void *motorController(void *arg){
       softPwmWrite(PWM_RIGHT,50);
       softPwmWrite(PWM_LEFT,50);
       delay(1500);
+      timeReset = true;
       //receivedMessage = "stop";
     }
     else{
