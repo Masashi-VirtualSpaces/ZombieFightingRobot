@@ -34,12 +34,14 @@ void *proximity(void *arg);
 void *listen(void *arg);
 void *songPlayer(void *arg);
 void *motorController(void *arg);
+void *timeTracker(void *arg)
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = "go";
 const char* stop = "stop";
 bool DetectedObj = false;
 bool PlaySong = false;
+int timePassed = 0;
 
 int main(){
   wiringPiSetup();
@@ -81,16 +83,17 @@ pthread_t thread2;
 pthread_t thread3;
 pthread_t thread4;
 pthread_t thread5;
+pthread_t thread6;
 rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
 rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
 rc5 = pthread_create(&thread5,NULL,motorController,(void *)NULL);
-
+rv6 = pthread_create(&thread6,NULL,timeTracker,(void *)NULL);
 //Test for errors in thread initialization.
-if(rc1||rc2||rc3||rc4||rc5){
+if(rc1||rc2||rc3||rc4||rc5||rc6){
   printf("Error in initializing threads!\n");
-  printf("broadcast: %d\nproximity: %d\nlisten: %d\nsongPlayer: %d\nmotorController: %d\n",rc1,rc2,rc3,rc4,rc5);
+  printf("broadcast: %d\nproximity: %d\nlisten: %d\nsongPlayer: %d\nmotorController: %d\ntimetracker: %d\n",rc1,rc2,rc3,rc4,rc5,rc6);
   exit(-1);
 }
 
@@ -114,6 +117,9 @@ for(t=0; t<NUM_THREADS; t++){
     }
   }
 */
+
+  softPwmWrite(PWM_RIGHT,0);
+  softPwmWrite(PWM_LEFT,0);
 
   delay(200);
   printf("Made it past switch\n");
@@ -188,6 +194,16 @@ void *motorController(void *arg){
       softPwmWrite(PWM_LEFT,0);
       DetectedObj = false;
     }
+    else if(timePassed > 2000){
+      softPwmWrite(PWM_RIGHT,0);
+      softPwmWrite(PWM_LEFT,0);
+      delay(2000);
+      digitalWrite(OUT_MT_DIR_RIGHT,0);
+      digitalWrite(OUT_MT_DIR_LEFT,1);
+      softPwmWrite(PWM_RIGHT,50);
+      softPwmWrite(PWM_LEFT,50);
+      delay(1500);
+    }
     else{
         //printf("motors running forward.\n");
       softPwmWrite(PWM_RIGHT,55);
@@ -212,5 +228,17 @@ void *songPlayer(void *arg){
       printf("Play song reset\n");
     }
     delay(300);
+  }
+}
+
+void *timeTracker(void *arg){
+  while(1){
+    if(DetectedObj){
+      timePassed = 0;
+    }
+    else{
+      delay(20);
+      timePassed+=20;
+    }
   }
 }
