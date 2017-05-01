@@ -211,6 +211,8 @@ void *motorController(void *arg){
       //receivedMessage = "stop";
     }
     else{
+      digitalWrite(OUT_MT_DIR_RIGHT,0);
+      digitalWrite(OUT_MT_DIR_LEFT,0);
         //printf("motors running forward.\n");
       softPwmWrite(PWM_RIGHT,55);
       softPwmWrite(PWM_LEFT,55);
