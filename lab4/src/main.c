@@ -51,8 +51,8 @@ int main(){
   pinMode(PWM_RIGHT,OUTPUT);
   softPwmCreate(PWM_LEFT,0,100);
   softPwmCreate(PWM_RIGHT,0,100);
-  digitalWrite(OUT_MT_DIR_RIGHT,1);
-  digitalWrite(OUT_MT_DIR_LEFT,1);
+  digitalWrite(OUT_MT_DIR_RIGHT,0);
+  digitalWrite(OUT_MT_DIR_LEFT,0);
 
   //Wait for switch to be hit in order to start program.
   //pinMode()
