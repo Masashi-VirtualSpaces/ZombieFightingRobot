@@ -343,7 +343,7 @@ void IrTransmitterTest(void)
 void IrTransceiverTest(void)
 {
     char c;
-    c='$';
+    c ='$';
     printf("Running IR Transceiver Test\n");
     if (init_ir(1200, 8, 1, 0) != 0)
     {
@@ -355,7 +355,7 @@ void IrTransceiverTest(void)
     setXmtLetter(c);
     const char* zombieMessage;
     const char* test;
-    test = '?';
+    test = "?";
     int match;
     int myRand;
     srand(3872094);
@@ -364,7 +364,9 @@ void IrTransceiverTest(void)
     {
         setTransmitModeOff();
         delay(100);
-        zombieMessage = getRcvLetter();
+        printf("test\n");
+        zombieMessage=tRcvLetter();
+        printf("Made it past test\n");
         printf("\r                            \rCharacter received: %c ", zombieMessage);
         match = strcmp(zombieMessage,test);
         if(match==0){
