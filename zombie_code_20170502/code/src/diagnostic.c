@@ -330,7 +330,7 @@ void IrTransmitterTest(void)
     }
     //printf("Type the letter to transmit then press ENTER... > ");
     //scanf(" %c", &c);
-    printf("Transmit letter: %c",c);
+    //printf("Transmit letter: %c",c);
     setXmtLetter(c);
     setTransmitModeOn();
     while(1)
@@ -343,21 +343,35 @@ void IrTransmitterTest(void)
 void IrTransceiverTest(void)
 {
     char c;
+    c='$';
     printf("Running IR Transceiver Test\n");
     if (init_ir(1200, 8, 1, 0) != 0)
     {
         fprintf(stderr, "Unable to initialize the IR tranceiver: %s\n", strerror(errno));
         return;
     }
-    printf("Type the letter to transmit then press ENTER... > ");
-    scanf(" %c", &c);
+    //printf("Type the letter to transmit then press ENTER... > ");
+    //scanf(" %c", &c);
     setXmtLetter(c);
+    char zombieMessage;
+    int match;
+    int myRand;
+    myRand = 0;
     while(1)
     {
         setTransmitModeOff();
         delay(100);
-        printf("\r                            \rCharacter received: %c ", getRcvLetter());
+        zombieMessage = getRcvLetter();
+        printf("\r                            \rCharacter received: %c ", zombieMessage);
+        match = strcmp(zombieMessage,'?');
+        if(match==0){
+          myRand = rand();
+          myRand = myRand%10 + 1;
+          myRand = myRand*120;
+          printf("Waiting for: %d\n",myRand);
+        }
         fflush(stdout);
+        delay(myRand);
         setTransmitModeOn();
         delay(400);
     }
@@ -417,7 +431,25 @@ void control_event(int sig)
 void irController(void){
   //int count = 0;
   //while(1){
+  srand(3872094);
+  char ZLetter;
     IrTransmitterTest();
+    delay(200);
+    setTransmitModeOff();
+
+    //Test receive.
+    int match;
+    int myRand;
+    while(1){
+      ZLetter = getRcvLetter();
+      match = strcmp(receivedMessage,stop);
+      if(match = 0){
+        myRand = rand();
+        myRand = myRand%10 + 1;
+        myRand = myRand*120;
+      }
+      printf("%d\n", );
+    }
 
   //}
 }

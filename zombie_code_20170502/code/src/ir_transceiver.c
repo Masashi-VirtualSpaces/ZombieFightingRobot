@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
-#include <sys/time.h> 
+#include <sys/time.h>
 #include <math.h>
 #include <pthread.h>
-#include <wiringPi.h> 
+#include <wiringPi.h>
 
 #include "utils.h"
 #include "pinout.h"
@@ -33,7 +33,7 @@ int baudRate;
 int numDataBits;
 int setParity;
 int parityType;
-int payload_len; 
+int payload_len;
 
 
 void edgeIRInterrupt (void)
@@ -55,7 +55,7 @@ void* transreceiver(void* null_ptr)
     const int idle_time_us = 25000;
 
     edge_cnt = 0;
-    
+
     while(1)
     {
         while(transmit_mode)
@@ -84,20 +84,20 @@ void* transreceiver(void* null_ptr)
                         start_idx = k + 1;
                     }
                 }
-                
-                if(numbit[start_idx] != 0 
-                   && numbit[start_idx+1] < payload_len 
+
+                if(numbit[start_idx] != 0
+                   && numbit[start_idx+1] < payload_len
                    && edge_state[start_idx] == 0
                    && !transmit_mode)
                 {
                     int bits[payload_len];
                     int parity_bit = 0;
-                    for(k=start_idx, i=0; i < payload_len 
-                        && k < MAX_NUMBIT 
+                    for(k=start_idx, i=0; i < payload_len
+                        && k < MAX_NUMBIT
                         && !transmit_mode; k++)
                     {
                         for(j=0; j < numbit[k]
-                            && i < payload_len 
+                            && i < payload_len
                             && !transmit_mode; j++, i++)
                         {
                             bits[i] = edge_state[k];
@@ -126,7 +126,7 @@ void* transreceiver(void* null_ptr)
     return (void*) 0;
 }
 
-int init_ir(int baud, int num_data_bits, int set_parity, int parity_type) 
+int init_ir(int baud, int num_data_bits, int set_parity, int parity_type)
 {
     int i, ret;
     baudRate = baud;
