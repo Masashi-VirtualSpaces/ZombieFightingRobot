@@ -365,7 +365,7 @@ void IrTransceiverTest(void)
         setTransmitModeOff();
         delay(100);
         printf("test\n");
-        zombieMessage=tRcvLetter();
+        zombieMessage=getRcvLetter();
         printf("Made it past test\n");
         printf("\r                            \rCharacter received: %c ", zombieMessage);
         match = strcmp(zombieMessage,test);
