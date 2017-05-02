@@ -353,9 +353,12 @@ void IrTransceiverTest(void)
     //printf("Type the letter to transmit then press ENTER... > ");
     //scanf(" %c", &c);
     setXmtLetter(c);
-    char zombieMessage;
+    const char* zombieMessage;
+    const char* test;
+    test = '?';
     int match;
     int myRand;
+    srand(3872094);
     myRand = 0;
     while(1)
     {
@@ -363,7 +366,7 @@ void IrTransceiverTest(void)
         delay(100);
         zombieMessage = getRcvLetter();
         printf("\r                            \rCharacter received: %c ", zombieMessage);
-        match = strcmp(zombieMessage,'?');
+        match = strcmp(zombieMessage,test);
         if(match==0){
           myRand = rand();
           myRand = myRand%10 + 1;
@@ -438,9 +441,9 @@ void irController(void){
     setTransmitModeOff();
 
     //Test receive.
-    int match;
-    int myRand;
-    while(1){
+    //int match;
+  //  int myRand;
+  /*  while(1){
       ZLetter = getRcvLetter();
       match = strcmp(receivedMessage,stop);
       if(match = 0){
@@ -450,6 +453,6 @@ void irController(void){
       }
       printf("%d\n", );
     }
-
+*/
   //}
 }
