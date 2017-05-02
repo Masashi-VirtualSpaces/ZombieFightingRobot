@@ -15,7 +15,7 @@ This program sets up various sensors and actuators, then allows the user to inte
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
-#include <wiringPi.h> 
+#include <wiringPi.h>
 
 #include "motors.h"
 #include "proximity.h"
@@ -37,6 +37,7 @@ void IrTransceiverTest(void);
 int audioTest(void);
 void UDPBroadcastTest(void);
 void UDPListennerTest(void);
+void irController(void);
 
 /**
 main function - Entry point function for diagnostic
@@ -78,6 +79,7 @@ int main (int argc, char *argv[])
         printf("    7 - Audio Test\n");
         printf("    8 - UDP Broadcast Test\n");
         printf("    9 - UDP Listener Test\n");
+        printf("    10 - lab 5 Test\n");
         printf("  Type a test number then press ENTER... > ");
         scanf(" %c", &c);
     }
@@ -127,6 +129,9 @@ int main (int argc, char *argv[])
         break;
     case 9:
         UDPListennerTest();
+        break;
+    case 10:
+        irController();
         break;
     default:
         fprintf(stderr, "Cannot handle argument \"%s\" (=%d)\n", argv[1], test_num);
@@ -315,15 +320,15 @@ void IrReceiverTest(void)
 
 void IrTransmitterTest(void)
 {
-    char c;
+    char c = "$";
     printf("Running IR Transmitter Test\n");
     if (init_ir(1200, 8, 1, 0) != 0)
     {
         fprintf(stderr, "Unable to initialize the IR tranceiver: %s\n", strerror(errno));
         return;
     }
-    printf("Type the letter to transmit then press ENTER... > ");
-    scanf(" %c", &c);
+    //printf("Type the letter to transmit then press ENTER... > ");
+    //scanf(" %c", &c);
     setXmtLetter(c);
     setTransmitModeOn();
     while(1)
@@ -405,4 +410,12 @@ void control_event(int sig)
     delay(200);
     printf(" done\n");
     exit(0);
+}
+
+void irController(void){
+  int count = 0;
+  //while(1){
+    IrTransmitterTest();
+    
+  //}
 }
