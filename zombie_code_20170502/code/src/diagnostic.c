@@ -78,8 +78,8 @@ int main (int argc, char *argv[])
         printf("    6 - Infra-Red Transceiver Test\n");
         printf("    7 - Audio Test\n");
         printf("    8 - UDP Broadcast Test\n");
-        printf("    9 - UDP Listener Test\n");
-        printf("    10 - lab 5 Test\n");
+        //printf("    9 - UDP Listener Test\n");
+        printf("    9 - lab 5 Test\n");
         printf("  Type a test number then press ENTER... > ");
         scanf(" %c", &c);
     }
@@ -88,7 +88,7 @@ int main (int argc, char *argv[])
         c = argv[1][0];
     }
 
-    if( c < '0' || c > '10')
+    if( c < '0' || c > '9')
     {
         // Handles argument type error
         fprintf(stderr, "Argument must be a number, received %c\n", c);
@@ -127,10 +127,10 @@ int main (int argc, char *argv[])
     case 8:
         UDPBroadcastTest();
         break;
-    case 9:
+    /*case 9:
         UDPListennerTest();
-        break;
-    case 10:
+        break;*/
+    case 9:
         irController();
         break;
     default:
