@@ -368,7 +368,9 @@ void IrTransceiverTest(void)
         zombieMessage=getRcvLetter();
         printf("Made it past test\n");
         printf("\r                            \rCharacter received: %c ", zombieMessage);
+        printf("made it\n");
         match = strcmp(zombieMessage,test);
+        printf("comparison worked\n");
         if(match==0){
           myRand = rand();
           myRand = myRand%10 + 1;
