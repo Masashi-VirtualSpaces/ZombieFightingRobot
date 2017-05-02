@@ -321,7 +321,7 @@ void IrReceiverTest(void)
 void IrTransmitterTest(void)
 {
     char c;
-    c = "$";
+    c = '$';
     printf("Running IR Transmitter Test\n");
     if (init_ir(1200, 8, 1, 0) != 0)
     {
@@ -330,6 +330,7 @@ void IrTransmitterTest(void)
     }
     //printf("Type the letter to transmit then press ENTER... > ");
     //scanf(" %c", &c);
+    printf("Transmit letter: %c",c);
     setXmtLetter(c);
     setTransmitModeOn();
     while(1)
