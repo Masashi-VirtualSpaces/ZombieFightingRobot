@@ -320,7 +320,8 @@ void IrReceiverTest(void)
 
 void IrTransmitterTest(void)
 {
-    char c = "$";
+    char c;
+    c = "$";
     printf("Running IR Transmitter Test\n");
     if (init_ir(1200, 8, 1, 0) != 0)
     {
@@ -413,9 +414,9 @@ void control_event(int sig)
 }
 
 void irController(void){
-  int count = 0;
+  //int count = 0;
   //while(1){
     IrTransmitterTest();
-    
+
   //}
 }
