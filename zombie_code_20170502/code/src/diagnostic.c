@@ -328,8 +328,8 @@ void IrTransmitterTest(void)
         fprintf(stderr, "Unable to initialize the IR tranceiver: %s\n", strerror(errno));
         return;
     }
-    printf("Type the letter to transmit then press ENTER... > ");
-    scanf(" %c", &c);
+    //printf("Type the letter to transmit then press ENTER... > ");
+    //scanf(" %c", &c);
     setXmtLetter(c);
     setTransmitModeOn();
     while(1)
