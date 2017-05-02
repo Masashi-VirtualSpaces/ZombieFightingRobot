@@ -88,7 +88,7 @@ int main (int argc, char *argv[])
         c = argv[1][0];
     }
 
-    if( c < '0' || c > '9')
+    if( c < '0' || c > '10')
     {
         // Handles argument type error
         fprintf(stderr, "Argument must be a number, received %c\n", c);
