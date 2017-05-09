@@ -79,8 +79,8 @@ int main(){
 int rc1;
 int rc2;
 int rc3;
-int rc4;
-int rc5;
+//int rc4;
+//int rc5;
 int rc6;
 pthread_t thread1;
 pthread_t thread2;
@@ -95,12 +95,13 @@ rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
 rc5 = pthread_create(&thread5,NULL,motorController,(void *)NULL);
 rc6 = pthread_create(&thread6,NULL,timeTracker,(void *)NULL);
 //Test for errors in thread initialization.
+/*
 if(rc1||rc2||rc3||rc4||rc5||rc6){
   printf("Error in initializing threads!\n");
   printf("broadcast: %d\nproximity: %d\nlisten: %d\nsongPlayer: %d\nmotorController: %d\ntimetracker: %d\n",rc1,rc2,rc3,rc4,rc5,rc6);
   exit(-1);
 }
-
+*/
 //Main loop for running robot.
 int done = 1;
 while(done != 0){
