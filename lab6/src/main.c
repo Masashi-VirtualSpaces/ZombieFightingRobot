@@ -185,14 +185,14 @@ void *motorController(void *arg){
         softPwmWrite(PWM_LEFT,55);
         break;
       case 1:
-        if(distance>68){
+        if(distance>68 || distance == -1){
           printf("Case 1\n");
           digitalWrite(OUT_MT_DIR_RIGHT,0);
           digitalWrite(OUT_MT_DIR_LEFT,0);
           softPwmWrite(PWM_RIGHT,55);
           softPwmWrite(PWM_LEFT,55);
         }
-        else if(distance < 52){
+        else if(distance < 52 ){
           digitalWrite(OUT_MT_DIR_RIGHT,1);
           digitalWrite(OUT_MT_DIR_LEFT,1);
           softPwmWrite(PWM_RIGHT,55);
