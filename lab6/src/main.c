@@ -36,6 +36,8 @@ void *songPlayer(void *arg);
 void *motorController(void *arg);
 void *timeTracker(void *arg);
 
+pthread_mutex_t lock;
+
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = "go";
@@ -106,7 +108,9 @@ if(rc1||rc2||rc3||rc4||rc5||rc6){
 int done = 1;
 while(done != 0){
   delay(2000);
+  pthread_mutex_lock(&lock);
   printf("Distance: %f\n",distance );
+  pthread_mutex_unlock(&lock);
   done = strcmp(receivedMessage,stop);
 }
 
@@ -145,12 +149,14 @@ void *proximity(void *arg){
   while(1)
   {
     delay(100);
+    pthread_mutex_lock(&lock);
     distance = getCmDistance();
     if(distance < 75 && distance > 0){
       DetectedObj = 1; //Detected an object in front of it.
       //DetectedObj = true;
       //PlaySong = true;
     }
+    pthread_mutex_unlock(&lock);
     //printf("Current distance: %f\n",distance);
   }
   delay(2000);
@@ -175,6 +181,9 @@ Function for controlling the motors.
 void *motorController(void *arg){
   printf("Motor controller initialized!\n");
   while(1){
+    pthread_mutex_lock(&lock);
+    localDistance = distance;
+    pthread_mutex_unlock(&lock);
     switch(DetectedObj){
       case 0:
         printf("Case 0\n");
@@ -185,14 +194,14 @@ void *motorController(void *arg){
         softPwmWrite(PWM_LEFT,55);
         break;
       case 1:
-        if(distance>68 || distance == -1){
+        if(localDistance>68 || localDistance == -1){
           printf("Case 1\n");
           digitalWrite(OUT_MT_DIR_RIGHT,0);
           digitalWrite(OUT_MT_DIR_LEFT,0);
           softPwmWrite(PWM_RIGHT,55);
           softPwmWrite(PWM_LEFT,55);
         }
-        else if(distance < 52 ){
+        else if(localDistance < 52 ){
           digitalWrite(OUT_MT_DIR_RIGHT,1);
           digitalWrite(OUT_MT_DIR_LEFT,1);
           softPwmWrite(PWM_RIGHT,55);
