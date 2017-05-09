@@ -35,11 +35,13 @@ void *listen(void *arg);
 void *songPlayer(void *arg);
 void *motorController(void *arg);
 void *timeTracker(void *arg);
+
 //Global variable declarations.
 double distance = 0;
 const char* receivedMessage = "go";
 const char* stop = "stop";
-bool DetectedObj = false;
+//bool DetectedObj = false;
+int DetectedObj = 0;
 bool PlaySong = false;
 bool timeReset = false;
 int timePassed = 0;
@@ -82,14 +84,14 @@ int rc5;
 int rc6;
 pthread_t thread1;
 pthread_t thread2;
-pthread_t thread3;
-pthread_t thread4;
+//pthread_t thread3;
+//pthread_t thread4;
 pthread_t thread5;
 pthread_t thread6;
 rc1 = pthread_create(&thread1,NULL,broadcast,(void *)NULL);
 rc2 = pthread_create(&thread2,NULL,proximity,(void *)NULL);
-rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
-rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
+//rc3 = pthread_create(&thread3,NULL,listen,(void *)NULL);
+//rc4 = pthread_create(&thread4,NULL,songPlayer,(void *)NULL);
 rc5 = pthread_create(&thread5,NULL,motorController,(void *)NULL);
 rc6 = pthread_create(&thread6,NULL,timeTracker,(void *)NULL);
 //Test for errors in thread initialization.
@@ -106,19 +108,6 @@ while(done != 0){
   printf("Distance: %f\n",distance );
   done = strcmp(receivedMessage,stop);
 }
-/*
-pthread_t threads[NUM_THREADS];
-int rc;
-long t;
-for(t=0; t<NUM_THREADS; t++){
-   printf("In main: creating thread %ld\n", t);
-   rc = pthread_create(&threads[t], NULL, broadcast, (void *)t);
-   if (rc){
-      printf("ERROR; return code from pthread_create() is %d\n", rc);
-      exit(-1);
-    }
-  }
-*/
 
   softPwmWrite(PWM_RIGHT,0);
   softPwmWrite(PWM_LEFT,0);
@@ -156,9 +145,10 @@ void *proximity(void *arg){
   {
     delay(100);
     distance = getCmDistance();
-    if(distance < 24 && distance > 0){
-      DetectedObj = true;
-      PlaySong = true;
+    if(distance < 75 && distance > 0){
+      DetectedObj = 1; //Detected an object in front of it.
+      //DetectedObj = true;
+      //PlaySong = true;
     }
     //printf("Current distance: %f\n",distance);
   }
@@ -184,6 +174,34 @@ Function for controlling the motors.
 void *motorController(void *arg){
   printf("Motor controller initialized!\n");
   while(1){
+    switch(DetectedObj){
+      case 0:
+        digitalWrite(OUT_MT_DIR_RIGHT,0);
+        digitalWrite(OUT_MT_DIR_LEFT,0);
+        //printf("motors running forward.\n");
+        softPwmWrite(PWM_RIGHT,55);
+        softPwmWrite(PWM_LEFT,55);
+        break;
+      case 1:
+      if(distance>68){
+        digitalWrite(OUT_MT_DIR_RIGHT,0);
+        digitalWrite(OUT_MT_DIR_LEFT,0);
+        softPwmWrite(PWM_RIGHT,55);
+        softPwmWrite(PWM_LEFT,55);
+      }
+      else if(distance < 52){
+        digitalWrite(OUT_MT_DIR_RIGHT,1);
+        digitalWrite(OUT_MT_DIR_LEFT,1);
+        softPwmWrite(PWM_RIGHT,55);
+        softPwmWrite(PWM_LEFT,55);
+      }
+      else{
+        softPwmWrite(PWM_RIGHT,0);
+        softPwmWrite(PWM_LEFT,0);
+      }
+      delay(250);
+    }
+    /*
     if(DetectedObj){
       softPwmWrite(PWM_RIGHT,0);
       softPwmWrite(PWM_LEFT,0);
@@ -219,6 +237,7 @@ void *motorController(void *arg){
       softPwmWrite(PWM_RIGHT,55);
       softPwmWrite(PWM_LEFT,55);
     }
+    */
     delay(300);
   }
 }
