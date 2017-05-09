@@ -199,6 +199,7 @@ void *motorController(void *arg){
           softPwmWrite(PWM_LEFT,55);
         }
         else{
+          printf("In else\n");
           softPwmWrite(PWM_RIGHT,0);
           softPwmWrite(PWM_LEFT,0);
         }
