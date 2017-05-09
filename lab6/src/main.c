@@ -180,6 +180,7 @@ Function for controlling the motors.
 -----------------------------------------------------------------------------*/
 void *motorController(void *arg){
   printf("Motor controller initialized!\n");
+  double localDistance = -1;
   while(1){
     pthread_mutex_lock(&lock);
     localDistance = distance;
