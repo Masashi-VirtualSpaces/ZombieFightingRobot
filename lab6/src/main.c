@@ -177,7 +177,7 @@ void *motorController(void *arg){
   while(1){
     switch(DetectedObj){
       case 0:
-        printf("Case 0\n", );
+        printf("Case 0\n");
         digitalWrite(OUT_MT_DIR_RIGHT,0);
         digitalWrite(OUT_MT_DIR_LEFT,0);
         //printf("motors running forward.\n");
@@ -186,7 +186,7 @@ void *motorController(void *arg){
         break;
       case 1:
         if(distance>68){
-          printf("Case 1\n", );
+          printf("Case 1\n");
           digitalWrite(OUT_MT_DIR_RIGHT,0);
           digitalWrite(OUT_MT_DIR_LEFT,0);
           softPwmWrite(PWM_RIGHT,55);
