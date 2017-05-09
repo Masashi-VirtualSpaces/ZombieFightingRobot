@@ -177,6 +177,7 @@ void *motorController(void *arg){
   while(1){
     switch(DetectedObj){
       case 0:
+        printf("Case 0\n", );
         digitalWrite(OUT_MT_DIR_RIGHT,0);
         digitalWrite(OUT_MT_DIR_LEFT,0);
         //printf("motors running forward.\n");
@@ -184,22 +185,25 @@ void *motorController(void *arg){
         softPwmWrite(PWM_LEFT,55);
         break;
       case 1:
-      if(distance>68){
-        digitalWrite(OUT_MT_DIR_RIGHT,0);
-        digitalWrite(OUT_MT_DIR_LEFT,0);
-        softPwmWrite(PWM_RIGHT,55);
-        softPwmWrite(PWM_LEFT,55);
-      }
-      else if(distance < 52){
-        digitalWrite(OUT_MT_DIR_RIGHT,1);
-        digitalWrite(OUT_MT_DIR_LEFT,1);
-        softPwmWrite(PWM_RIGHT,55);
-        softPwmWrite(PWM_LEFT,55);
-      }
-      else{
-        softPwmWrite(PWM_RIGHT,0);
-        softPwmWrite(PWM_LEFT,0);
-      }
+        if(distance>68){
+          printf("Case 1\n", );
+          digitalWrite(OUT_MT_DIR_RIGHT,0);
+          digitalWrite(OUT_MT_DIR_LEFT,0);
+          softPwmWrite(PWM_RIGHT,55);
+          softPwmWrite(PWM_LEFT,55);
+        }
+        else if(distance < 52){
+          digitalWrite(OUT_MT_DIR_RIGHT,1);
+          digitalWrite(OUT_MT_DIR_LEFT,1);
+          softPwmWrite(PWM_RIGHT,55);
+          softPwmWrite(PWM_LEFT,55);
+        }
+        else{
+          softPwmWrite(PWM_RIGHT,0);
+          softPwmWrite(PWM_LEFT,0);
+        }
+        break;
+
       delay(250);
     }
     /*
