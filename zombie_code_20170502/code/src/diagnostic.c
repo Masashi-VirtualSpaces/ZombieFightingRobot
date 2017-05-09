@@ -379,6 +379,8 @@ void IrTransceiverTest(void)
         }
         fflush(stdout);
         delay(myRand);
+        zombieMessage = "";
+        myRand = 0;
         setTransmitModeOn();
         delay(400);
     }
