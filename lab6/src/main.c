@@ -78,9 +78,9 @@ int main(){
 //This parts activates the threads.
 int rc1;
 int rc2;
-int rc3;
+//int rc3;
 //int rc4;
-//int rc5;
+int rc5;
 int rc6;
 pthread_t thread1;
 pthread_t thread2;
