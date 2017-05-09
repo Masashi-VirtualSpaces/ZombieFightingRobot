@@ -215,7 +215,7 @@ void *motorController(void *arg){
         }
         break;
 
-      delay(250);
+      delay(100);
     }
     /*
     if(DetectedObj){
