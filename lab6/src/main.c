@@ -181,6 +181,7 @@ Function for controlling the motors.
 void *motorController(void *arg){
   printf("Motor controller initialized!\n");
   double localDistance = -1;
+  bool serpentine = false;
   while(1){
     pthread_mutex_lock(&lock);
     localDistance = distance;
@@ -190,9 +191,20 @@ void *motorController(void *arg){
         printf("Case 0\n");
         digitalWrite(OUT_MT_DIR_RIGHT,0);
         digitalWrite(OUT_MT_DIR_LEFT,0);
+        if(serpentine){
+          softPwmWrite(PWM_RIGHT,55);
+          softPwmWrite(PWM_LEFT,70);
+        }
+        else{
+          softPwmWrite(PWM_RIGHT,70);
+          softPwmWrite(PWM_LEFT,55);
+        }
+        serpentine = !serpentine;
+        //digitalWrite(OUT_MT_DIR_RIGHT,0);
+        //digitalWrite(OUT_MT_DIR_LEFT,0);
         //printf("motors running forward.\n");
-        softPwmWrite(PWM_RIGHT,55);
-        softPwmWrite(PWM_LEFT,55);
+        //softPwmWrite(PWM_RIGHT,55);
+        //softPwmWrite(PWM_LEFT,55);
         break;
       case 1:
         if(localDistance>68 || localDistance == -1){
