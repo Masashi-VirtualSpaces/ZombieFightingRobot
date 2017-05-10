@@ -202,14 +202,24 @@ void *motorController(void *arg){
         if(serpentine){
           printf("right\n");
           softPwmWrite(PWM_RIGHT,30);
+          softPwmWrite(PWM_LEFT,50);
+          delay(100);
+          softPwmWrite(PWM_LEFT,60);
+          delay(100);
           softPwmWrite(PWM_LEFT,70);
+          delay(100);
         }
         else{
           printf("left\n");
+          softPwmWrite(PWM_RIGHT,50);
+          delay(100);
+          softPwmWrite(PWM_RIGHT,60);
+          delay(100);
           softPwmWrite(PWM_RIGHT,70);
+          delay(100);
           softPwmWrite(PWM_LEFT,30);
         }
-        delay(300);
+
         serpentine = !serpentine;
         //digitalWrite(OUT_MT_DIR_RIGHT,0);
         //digitalWrite(OUT_MT_DIR_LEFT,0);
