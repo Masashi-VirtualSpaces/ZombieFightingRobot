@@ -200,14 +200,14 @@ void *motorController(void *arg){
         digitalWrite(OUT_MT_DIR_RIGHT,0);
         digitalWrite(OUT_MT_DIR_LEFT,0);
         if(serpentine){
-          softPwmWrite(PWM_RIGHT,55);
+          softPwmWrite(PWM_RIGHT,30);
           softPwmWrite(PWM_LEFT,70);
         }
         else{
           softPwmWrite(PWM_RIGHT,70);
-          softPwmWrite(PWM_LEFT,55);
+          softPwmWrite(PWM_LEFT,30);
         }
-        delay(200);
+        delay(300);
         serpentine = !serpentine;
         //digitalWrite(OUT_MT_DIR_RIGHT,0);
         //digitalWrite(OUT_MT_DIR_LEFT,0);
