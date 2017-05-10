@@ -213,9 +213,9 @@ void *motorController(void *arg){
           printf("left\n");
           softPwmWrite(PWM_RIGHT,50);
           delay(100);
-          softPwmWrite(PWM_RIGHT,60);
+          softPwmWrite(PWM_RIGHT,55);
           delay(100);
-          softPwmWrite(PWM_RIGHT,70);
+          softPwmWrite(PWM_RIGHT,60);
           delay(100);
           softPwmWrite(PWM_LEFT,30);
         }
