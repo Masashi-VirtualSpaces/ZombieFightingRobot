@@ -35,6 +35,7 @@ void *listen(void *arg);
 void *songPlayer(void *arg);
 void *motorController(void *arg);
 void *timeTracker(void *arg);
+void control_event(int sig);
 
 pthread_mutex_t lock;
 
@@ -49,6 +50,12 @@ bool timeReset = false;
 int timePassed = 0;
 
 int main(){
+
+  // Inform OS that control_event() function will be handling kill signals
+  (void)signal(SIGINT,control_event);
+  (void)signal(SIGQUIT,control_event);
+  (void)signal(SIGTERM,control_event);
+
   wiringPiSetup();
 
   //Set up motor PWM's initialize them to 0 with range 0-100%
@@ -299,4 +306,16 @@ void *timeTracker(void *arg){
       timePassed+=20;
     }
   }
+}
+
+void control_event(int sig)
+{
+    printf("\n  Exiting...");
+    stopAllMotors();
+    stopPulse();
+    stopIr();
+    stopAudio();
+    delay(200);
+    printf(" done\n");
+    exit(0);
 }
