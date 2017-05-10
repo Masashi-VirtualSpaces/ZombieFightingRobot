@@ -190,6 +190,7 @@ void *motorController(void *arg){
   double localDistance = -1;
   bool serpentine = false;
   while(1){
+    delay(100);
     pthread_mutex_lock(&lock);
     localDistance = distance;
     pthread_mutex_unlock(&lock);
@@ -234,8 +235,6 @@ void *motorController(void *arg){
           softPwmWrite(PWM_LEFT,0);
         }
         break;
-
-      delay(100);
     }
     /*
     if(DetectedObj){
