@@ -311,7 +311,9 @@ void *timeTracker(void *arg){
 void control_event(int sig)
 {
     printf("\n  Exiting...");
-    stopAllMotors();
+    //stopAllMotors();
+    softPwmWrite(PWM_RIGHT,0);
+    softPwmWrite(PWM_LEFT,0);
     stopPulse();
     stopIr();
     stopAudio();
