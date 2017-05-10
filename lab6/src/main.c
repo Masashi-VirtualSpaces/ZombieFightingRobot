@@ -315,7 +315,7 @@ void control_event(int sig)
     softPwmWrite(PWM_RIGHT,0);
     softPwmWrite(PWM_LEFT,0);
     stopPulse();
-    stopIr();
+    //stopIr();
     stopAudio();
     delay(200);
     printf(" done\n");
