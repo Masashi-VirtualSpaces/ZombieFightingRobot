@@ -188,7 +188,8 @@ Function for controlling the motors.
 void *motorController(void *arg){
   printf("Motor controller initialized!\n");
   double localDistance = -1;
-  bool serpentine = false;
+  bool serpentine = true;
+  bool isStart = true;
   while(1){
     delay(100);
     pthread_mutex_lock(&lock);
@@ -196,6 +197,16 @@ void *motorController(void *arg){
     pthread_mutex_unlock(&lock);
     switch(DetectedObj){
       case 0:
+      if(isStart){
+          printf("left\n");
+          softPwmWrite(PWM_RIGHT,50);
+          delay(50);
+          softPwmWrite(PWM_RIGHT,60);
+          delay(50);
+          softPwmWrite(PWM_RIGHT,70);
+          delay(50);
+          softPwmWrite(PWM_LEFT,30);
+      }
         printf("Case 0\n");
         digitalWrite(OUT_MT_DIR_RIGHT,0);
         digitalWrite(OUT_MT_DIR_LEFT,0);
@@ -213,9 +224,9 @@ void *motorController(void *arg){
           printf("left\n");
           softPwmWrite(PWM_RIGHT,50);
           delay(100);
-          softPwmWrite(PWM_RIGHT,55);
-          delay(100);
           softPwmWrite(PWM_RIGHT,60);
+          delay(100);
+          softPwmWrite(PWM_RIGHT,70);
           delay(100);
           softPwmWrite(PWM_LEFT,30);
         }
