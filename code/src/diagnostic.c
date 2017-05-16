@@ -282,7 +282,8 @@ int rampUpPwmTest(void)
         if (c == 'q') break;
     }
     // Stop the motor
-    stopMotor(i);
+    stopMotor(0);
+    stopMotor(1);
     return 0;
 }
 
