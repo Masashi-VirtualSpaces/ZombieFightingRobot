@@ -199,13 +199,13 @@ void *motorController(void *arg){
       case 0:
       if(isStart){
           printf("left\n");
+          softPwmWrite(PWM_LEFT,30);
           softPwmWrite(PWM_RIGHT,50);
           delay(50);
           softPwmWrite(PWM_RIGHT,60);
           delay(50);
           softPwmWrite(PWM_RIGHT,70);
           delay(50);
-          softPwmWrite(PWM_LEFT,30);
       }
         printf("Case 0\n");
         digitalWrite(OUT_MT_DIR_RIGHT,0);
@@ -222,13 +222,13 @@ void *motorController(void *arg){
         }
         else{
           printf("left\n");
+          softPwmWrite(PWM_LEFT,30);
           softPwmWrite(PWM_RIGHT,50);
           delay(100);
           softPwmWrite(PWM_RIGHT,60);
           delay(100);
           softPwmWrite(PWM_RIGHT,70);
           delay(100);
-          softPwmWrite(PWM_LEFT,30);
         }
 
         serpentine = !serpentine;

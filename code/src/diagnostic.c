@@ -15,7 +15,7 @@ This program sets up various sensors and actuators, then allows the user to inte
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
-#include <wiringPi.h> 
+#include <wiringPi.h>
 
 #include "motors.h"
 #include "proximity.h"
@@ -264,6 +264,7 @@ int rampUpPwmTest(void)
     printf("Type any motor number (left:0 - right:1) then press ENTER... > ");
     scanf(" %c", &c);
     i = c - '0';
+    printf("i: %s\n",i);
     getchar();
 
     printf("Will ramp up motor %d. Press the ENTER key to increment, or 'q' then ENTER to stop...\n", i);
