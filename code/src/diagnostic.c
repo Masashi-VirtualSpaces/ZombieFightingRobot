@@ -273,7 +273,8 @@ int rampUpPwmTest(void)
     while(dutyCycle <= 100)
     {
         printf("  motor duty-cycle at %d%%\n", dutyCycle);
-        setDutyCycle(i, dutyCycle);
+        setDutyCycle(0, dutyCycle);
+        setDutyCycle(1, dutyCycle);
         dutyCycle += 5;
         // Waits for a 'ENTER'
         scanf("%c", &c);
