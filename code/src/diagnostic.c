@@ -264,7 +264,7 @@ int rampUpPwmTest(void)
     printf("Type any motor number (left:0 - right:1) then press ENTER... > ");
     scanf(" %c", &c);
     i = c - '0';
-    printf("i: %s\n",i);
+    printf("i: %d\n",i);
     getchar();
 
     printf("Will ramp up motor %d. Press the ENTER key to increment, or 'q' then ENTER to stop...\n", i);
